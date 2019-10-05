@@ -1,16 +1,61 @@
 package model;
 
-public class Address {
-private String type;
-private String address;
-private String city;
-private String state;
-private String zip;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="addresslist")
+public class Address {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="ADDRESSLIST_ID")
+	private int addressId;
+	@Column(name="TYPE")
+	private String type;
+	@Column(name="ADDRESS")
+	private String address;
+	@Column(name="CITY")
+	private String city;
+	@Column(name="STATE")
+	private String state;
+	@Column(name="ZIP")
+	private String zip;
+	
 	public Address() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Address(int id, String type, String address, String city, String state, String zip) {
+		super();
+		this.addressId = id;
+		this.type = type;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+	}
+	
+	public Address(String type, String address, String city, String state, String zip) {
+		super();
+		this.type = type;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+	}
 
+	public int getId() {
+		return addressId;
+	}
+
+	public void setId(int id) {
+		this.addressId = id;
+	}
 	public String getType() {
 		return type;
 	}
@@ -49,6 +94,12 @@ private String zip;
 
 	public void setZip(String zip) {
 		this.zip = zip;
+	}
+	
+	@Override
+	public String toString() {
+		return "Address [id=" + addressId + ", type=" + type + ", address=" + address + ", city=" 
+				+ city + ", state=" + state + ", zip=" + zip + "]";
 	}
 
 }

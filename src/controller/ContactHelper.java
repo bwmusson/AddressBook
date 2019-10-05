@@ -10,6 +10,11 @@ import javax.persistence.TypedQuery;
 import model.Contact;
 
 public class ContactHelper {
+	
+	public ContactHelper() {
+		
+	}
+
 	static EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("UserAddressBook");
 
 	public void insertContacts(Contact c) {
@@ -112,5 +117,4 @@ public class ContactHelper {
 	public void cleanUp() {
 		emfactory.close();
 	}
-
 }

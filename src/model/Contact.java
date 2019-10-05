@@ -1,12 +1,17 @@
 package model;
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,21 +20,39 @@ public class Contact {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="CONTACTS_ID")
-	private int id;
+	private int contactId;
 	@Column(name="FIRSTNAME")
 	private String firstName;
 	@Column(name="LASTNAME")
 	private String lastName;
 	@Column(name="DOB")
 	private LocalDate dob;
-
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(
+			name="CONTACT_ADDRESSES",
+			joinColumns={@JoinColumn(name="CONTACTS_ID",
+			referencedColumnName="CONTACTS_ID") },
+			inverseJoinColumns={ @JoinColumn(name="ADDRESSLIST_ID",
+			referencedColumnName="ADDRESSLIST_ID", unique=true) }
+	)
+	private List<Address> contactAddresses;
+	
 	public Contact() {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Contact(int id, String firstName, String lastName, LocalDate dob, List<Address> addresses) {
+		super();
+		this.contactId = id;
+		this.dob = dob;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.contactAddresses = addresses;
+	}
+	
 	public Contact(int id, String firstName, String lastName, LocalDate dob) {
 		super();
-		this.id = id;
+		this.contactId = id;
 		this.dob = dob;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -43,11 +66,11 @@ public class Contact {
 	}
 
 	public int getId() {
-		return id;
+		return contactId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.contactId = id;
 	}
 
 	public String getFirstName() {
@@ -73,9 +96,36 @@ public class Contact {
 	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
+	
+	public void setContactAddresses(List<Address> ca) {
+		this.contactAddresses = ca;
+	}
+	
+	public List<Address> getContactAddresses(){
+		return this.contactAddresses;
+	}
+	
+	public void addAddress(Address a) {
+		this.contactAddresses.add(a);
+	}
+	
+	public void removeAddress(Address a) {
+		if(this.contactAddresses.contains(a)) {
+			this.contactAddresses.remove(a);
+		}
+	}
 
 	@Override
 	public String toString() {
-		return "Contact [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + "]";
+		if(!this.contactAddresses.isEmpty()) {
+			StringBuilder addresses = new StringBuilder();
+			for(Address a : this.contactAddresses) {
+				addresses.append(a.toString());
+			}
+			return "Contact [id=" + contactId + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + ", Addresses: [" + addresses.toString() + "]";
+		}
+		else {
+			return "Contact [id=" + contactId + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + "]";
+		}
 	}
 }

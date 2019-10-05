@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -29,11 +29,8 @@ CREATE TABLE `addresslist` (
   `CITY` varchar(20) DEFAULT NULL,
   `STATE` varchar(20) DEFAULT NULL,
   `ZIP` varchar(15) DEFAULT NULL,
-  `CONTACTS_ID` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ADDRESSLIST_ID`),
-  KEY `CONTACTS_ID` (`CONTACTS_ID`),
-  CONSTRAINT `addresslist_ibfk_1` FOREIGN KEY (`CONTACTS_ID`) REFERENCES `contacts` (`CONTACTS_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`ADDRESSLIST_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +39,35 @@ CREATE TABLE `addresslist` (
 
 LOCK TABLES `addresslist` WRITE;
 /*!40000 ALTER TABLE `addresslist` DISABLE KEYS */;
+INSERT INTO `addresslist` VALUES (1,'Home','123 Paper Street','Anytown','NY','12345'),(2,'Home','123 Paper Street','Anytown','NY','12345'),(3,'Home','123 Paper Street','Anytown','NY','12345'),(4,'Home','123 Paper Street','Anytown','NY','12345'),(5,'Home','123 Paper Street','Anytown','NY','12345'),(6,'Work','256 Paper Street','Anytown','NY','12345');
 /*!40000 ALTER TABLE `addresslist` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `contact_addresses`
+--
+
+DROP TABLE IF EXISTS `contact_addresses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `contact_addresses` (
+  `CONTACTS_ID` int(11) NOT NULL,
+  `ADDRESSLIST_ID` int(11) NOT NULL,
+  KEY `CONTACTS_ID_idx` (`CONTACTS_ID`),
+  KEY `ADDRESSLIST_ID_idx` (`ADDRESSLIST_ID`),
+  CONSTRAINT `ADDRESSLIST_ID` FOREIGN KEY (`ADDRESSLIST_ID`) REFERENCES `addresslist` (`ADDRESSLIST_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `CONTACTS_ID` FOREIGN KEY (`CONTACTS_ID`) REFERENCES `contacts` (`CONTACTS_ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contact_addresses`
+--
+
+LOCK TABLES `contact_addresses` WRITE;
+/*!40000 ALTER TABLE `contact_addresses` DISABLE KEYS */;
+INSERT INTO `contact_addresses` VALUES (3,6);
+/*!40000 ALTER TABLE `contact_addresses` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -80,4 +105,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-04  1:03:38
+-- Dump completed on 2019-10-05 17:00:39
