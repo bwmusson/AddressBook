@@ -5,7 +5,18 @@
 <title>Address Book</title>
 </head>
 <body>
-<h1>Address Book</h1>
-<h4>Coming soon!</h4>
+<h3>Welcome to Address Book Program!</h3>
+<form action = "addContactServlet" method="post">
+First Name: <input type ="text" name = "firstName">
+ Last Name: <input type = "text" name = "lastName"><br />
+Date of Birth: <input type = "text" name = "month" placeholder = "mm" size = "4">
+				<input type = "text" name = "day" placeholder = "dd" size = "4">
+				<input type = "text" name = "year" placeholder = "yyyy" size = "4"><br />
+<input type = "submit" value="Add Contact">
+</form>
+<br />
+<a href = "viewAllItemsServlet">View the Contacts list</a><br />
+<a href = "viewAllListsServlet">View all Address lists</a><br />
+<a href = "addItemsForListServlet">Create a new contact</a>
 </body>
 </html>
