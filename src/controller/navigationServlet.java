@@ -59,8 +59,8 @@ public class navigationServlet extends HttpServlet {
 		} else if (act.equals("edit")) {
 			try {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));
-				Contact itemToEdit = dao.searchForContactsById(tempId);
-				request.setAttribute("contactToEdit", itemToEdit);
+				Contact contactToEdit = dao.searchForContactsById(tempId);
+				request.setAttribute("contactToEdit", contactToEdit);
 				getServletContext().getRequestDispatcher("/edit-contact.jsp").forward(request, response);
 			} catch (NumberFormatException e) {
 				getServletContext().getRequestDispatcher("/viewAllContactsServlet").forward(request, response);
