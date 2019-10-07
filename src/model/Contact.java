@@ -36,6 +36,15 @@ public class Contact {
 			referencedColumnName="ADDRESSLIST_ID", unique=true) }
 	)
 	private List<Address> contactAddresses;
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(
+			name="CONTACT_PHONES",
+			joinColumns={@JoinColumn(name="CONTACTS_ID",
+			referencedColumnName="CONTACTS_ID") },
+			inverseJoinColumns={ @JoinColumn(name="PHONELIST_ID",
+			referencedColumnName="PHONELIST_ID", unique=true) }
+	)
+	private List<Phone> contactPhones;
 	
 	public Contact() {
 		// TODO Auto-generated constructor stub
@@ -114,15 +123,51 @@ public class Contact {
 			this.contactAddresses.remove(a);
 		}
 	}
+	
+	public void setContactPhones(List<Phone> cp) {
+		this.contactPhones = cp;
+	}
+	
+	public List<Phone> getContactPhones(){
+		return this.contactPhones;
+	}
+	
+	public void addPhone(Phone p) {
+		this.contactPhones.add(p);
+	}
+	
+	public void removePhone(Phone p) {
+		if(this.contactPhones.contains(p)) {
+			this.contactPhones.remove(p);
+		}
+	}
 
 	@Override
 	public String toString() {
-		if(!this.contactAddresses.isEmpty()) {
+		if(!this.contactAddresses.isEmpty() && this.contactPhones.isEmpty()) {
 			StringBuilder addresses = new StringBuilder();
 			for(Address a : this.contactAddresses) {
 				addresses.append(a.toString());
 			}
 			return "Contact [id=" + contactId + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + ", Addresses: [" + addresses.toString() + "]";
+		}
+		else if(this.contactAddresses.isEmpty() && !this.contactPhones.isEmpty()) {
+			StringBuilder phones = new StringBuilder();
+			for(Phone p : this.contactPhones) {
+				phones.append(p.toString());
+			}
+			return "Contact [id=" + contactId + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + ", Phones: [" + phones.toString() + "]";
+		}
+		else if(!this.contactAddresses.isEmpty() && !this.contactPhones.isEmpty()) {
+			StringBuilder addresses = new StringBuilder();
+			for(Address a : this.contactAddresses) {
+				addresses.append(a.toString());
+			}
+			StringBuilder phones = new StringBuilder();
+			for(Phone p : this.contactPhones) {
+				phones.append(p.toString());
+			}
+			return "Contact [id=" + contactId + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + ", Addresses: [" + addresses.toString() + "], Phones: [" + phones.toString() + "]";
 		}
 		else {
 			return "Contact [id=" + contactId + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + "]";
