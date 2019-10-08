@@ -15,13 +15,13 @@ City: <input type = "text" name = "city"> State:<input type = "text" name = "sta
 
 Available Contacts:<br />
 
-<select name="allContactsToAdd" multiple size="6">
+<select name="allContactsToAdd" multiple size="6" required="required">
 <c:forEach items="${requestScope.allContacts}" var="currentcontact">
    <option value = "${currentcontact.contactId}">${currentcontact.firstName} ${currentcontact.lastName}</option>
 </c:forEach>
 </select>
 <br />
-<input type = "submit" value="Create Contacts and Add Address">
+<input type = "submit" value="Add Address">
 </form>
 <a href = "index.html">Go to add new contacts instead</a>
 </body>
