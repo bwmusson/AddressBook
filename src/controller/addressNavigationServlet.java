@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,19 +18,21 @@ import model.Contact;
 @WebServlet("/addressNavigationServlet")
 public class addressNavigationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public addressNavigationServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public addressNavigationServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		AddressHelper ah = new AddressHelper();
 		ContactHelper ch = new ContactHelper();
 		String act = request.getParameter("doThisToItem");
@@ -53,26 +57,41 @@ public class addressNavigationServlet extends HttpServlet {
 				getServletContext().getRequestDispatcher("/viewAllDataServlet").forward(request, response);
 			}
 
-		} /*else if (act.equals("edit")) {
+		} else if (act.equals("edit")) {
 			try {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));
-				Contact contactToEdit = ah.searchForContactsById(tempId);
+				Contact contactToEdit = ch.searchForContactsById(tempId);
+				List<Address> allAddresses = ah.showAllAddresses();
+				List<Address> currentAddress = contactToEdit.getContactAddresses();
+
+				System.out.println("----After removing items-------");
+				for (int i = 0; i < allAddresses.size(); i++) {
+					for (int j = 0; j < currentAddress.size(); j++) {
+						if (allAddresses.get(i).getAddressId() == allAddresses.get(j).getAddressId()) {
+							allAddresses.remove(i);
+						}
+					}
+				}
+
 				request.setAttribute("contactToEdit", contactToEdit);
-				getServletContext().getRequestDispatcher("/edit-contact.jsp").forward(request, response);
+				request.setAttribute("allAddressToAdd", allAddresses);
+				getServletContext().getRequestDispatcher("/edit-address.jsp").forward(request, response);
 			} catch (NumberFormatException e) {
-				getServletContext().getRequestDispatcher("/viewAllContactsServlet").forward(request, response);
-			} 
+				getServletContext().getRequestDispatcher("/viewAllAddressServlet").forward(request, response);
+			}
 
 		} else if (act.equals("add")) {
-			getServletContext().getRequestDispatcher("/index.html").forward(request, response);
-		}*/
+			getServletContext().getRequestDispatcher("/addAddressForContactsServlet").forward(request, response);
+		}
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 	}
 
 }

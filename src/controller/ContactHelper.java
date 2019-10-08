@@ -74,6 +74,7 @@ public class ContactHelper {
 		em.close();
 	}
 
+	/*
 	public List<Contact> searchForContactsByFirstName(String first) {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();

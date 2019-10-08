@@ -27,7 +27,7 @@
 <input type = "submit" value = "delete" name="doThisToItem">
 <input type="submit" value = "add" name = "doThisToItem">
 </form>
-<a href="addAddressForContactServlet">Create a new address</a>
+<a href="addAddressForContactsServlet">Create a new address</a>
 <a href="index.html">Insert a new contact</a>
 </body>
 </body>
