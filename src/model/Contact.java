@@ -74,11 +74,11 @@ public class Contact {
 		this.lastName = lastName;
 	}
 
-	public int getId() {
+	public int getContactId() {
 		return contactId;
 	}
 
-	public void setId(int id) {
+	public void setContactId(int id) {
 		this.contactId = id;
 	}
 
@@ -119,8 +119,17 @@ public class Contact {
 	}
 	
 	public void removeAddress(Address a) {
-		if(this.contactAddresses.contains(a)) {
-			this.contactAddresses.remove(a);
+		Address contAddress = a;
+		for(Address ca : this.contactAddresses) {
+			if(ca.getAddressId() == a.getAddressId()) {
+				contAddress = ca;
+			}
+		}
+		if(this.contactAddresses.contains(contAddress)) {
+			this.contactAddresses.remove(contAddress);
+		}
+		else {
+			System.out.println("Address Not Found");
 		}
 	}
 	

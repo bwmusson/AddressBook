@@ -9,18 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Address;
 import model.Contact;
+import model.Phone;
 
 /**
- * Servlet implementation class addressNavigationServlet
+ * Servlet implementation class phoneNavigationServlet
  */
-@WebServlet("/addressNavigationServlet")
-public class addressNavigationServlet extends HttpServlet {
+@WebServlet("/phoneNavigationServlet")
+public class phoneNavigationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public addressNavigationServlet() {
+    public phoneNavigationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +30,7 @@ public class addressNavigationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AddressHelper ah = new AddressHelper();
+		PhoneHelper ph = new PhoneHelper();
 		ContactHelper ch = new ContactHelper();
 		String act = request.getParameter("doThisToItem");
 
@@ -42,9 +43,9 @@ public class addressNavigationServlet extends HttpServlet {
 				int tempId = Integer.parseInt(request.getParameter("id"));
 				int contId = Integer.parseInt(request.getParameter("contId"));
 				Contact cont = ch.searchForContactsById(contId);
-				Address addressToDelete = ah.searchForAddressById(tempId);
-				cont.removeAddress(addressToDelete);
-				ah.deleteAddress(addressToDelete);
+				Phone phoneToDelete = ph.searchForPhoneById(tempId);
+				cont.removePhone(phoneToDelete);
+				ph.deletePhone(phoneToDelete);
 				System.out.println("worked");
 
 			} catch (NumberFormatException e) {
@@ -72,7 +73,8 @@ public class addressNavigationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

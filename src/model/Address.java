@@ -49,11 +49,11 @@ public class Address {
 		this.zip = zip;
 	}
 
-	public int getId() {
+	public int getAddressId() {
 		return addressId;
 	}
 
-	public void setId(int id) {
+	public void setAddressId(int id) {
 		this.addressId = id;
 	}
 	public String getType() {

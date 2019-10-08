@@ -37,11 +37,11 @@ public class Phone {
 		this.number = number;
 	}
 	
-	public int getId() {
+	public int getPhoneId() {
 		return phoneId;
 	}
 
-	public void setId(int id) {
+	public void setPhoneId(int id) {
 		this.phoneId = id;
 	}
 	

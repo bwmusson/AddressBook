@@ -13,7 +13,7 @@
 <table>
 <c:forEach items="${requestScope.allContacts}" var="currentcontact">
 <tr>
-   <td><input type="radio" name="id" value="${currentcontact.id}"></td>
+   <td><input type="radio" name="id" value="${currentcontact.contactId}"></td>
    <td><h4>${currentcontact.firstName} ${currentcontact.lastName}</h4></td></tr>
       <c:forEach var = "listVal" items = "${currentcontact.contactAddresses}">
             <tr><td></td><td colspan="3">

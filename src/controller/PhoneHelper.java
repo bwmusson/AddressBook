@@ -37,7 +37,7 @@ public class PhoneHelper {
 		TypedQuery<Phone> typedQuery = em.createQuery(
 				"select i from Phone i where i.phoneId = :selectedId", Phone.class);
 		// Substitute parameter with actual data from the toDelete item
-		typedQuery.setParameter("selectedId", toDelete.getId());
+		typedQuery.setParameter("selectedId", toDelete.getPhoneId());
 		// we only want one result
 		typedQuery.setMaxResults(1);
 		// get the result and save it into a new list item
