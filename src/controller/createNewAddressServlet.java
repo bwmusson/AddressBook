@@ -40,23 +40,17 @@ public class createNewAddressServlet extends HttpServlet {
 		String city = request.getParameter("city");
 		String state = request.getParameter("state");
 		String zip = request.getParameter("zip");
-
-		String[] selectedContacts = request.getParameterValues("allContactsToAdd");
-		Contact selectedContactInList = new Contact();
-		if (selectedContacts != null && selectedContacts.length > 0) {
-			for (int i = 0; i < selectedContacts.length; i++) {
-				System.out.println(selectedContacts[i]);
-				selectedContactInList = ch.searchForContactsById(Integer.parseInt(selectedContacts[i]));
-			}
-		}
-
 		Address ad = new Address(type, address, city, state, zip);
-		List<Address> newadd = new ArrayList<Address>();
-		newadd.add(ad);
 		
-		selectedContactInList.setContactAddresses(newadd);		
-		ch.insertContacts(selectedContactInList);		
-		System.out.println(selectedContactInList.toString());
+		String[] selectedContacts = request.getParameterValues("allContactsToAdd");
+		
+		for(String s : selectedContacts) {
+			int contactId = Integer.parseInt(s);
+			Contact c = ch.searchForContactsById(contactId);
+			c.addAddress(ad);
+			ch.updateContacts(c);
+			System.out.println(c.toString());
+		}
 
 		getServletContext().getRequestDispatcher("/viewAllAddressServlet").forward(request, response);
 	}
