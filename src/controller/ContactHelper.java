@@ -74,47 +74,6 @@ public class ContactHelper {
 		em.close();
 	}
 
-	/*
-	public List<Contact> searchForContactsByFirstName(String first) {
-		// TODO Auto-generated method stub
-		EntityManager em = emfactory.createEntityManager();
-		em.getTransaction().begin();
-		TypedQuery<Contact> typedQuery = em.createQuery("select co from Contact co where co.firstName = :selectedFirstName",
-				Contact.class);
-		typedQuery.setParameter("selectedFirstName", first);
-
-		List<Contact> foundContacts = typedQuery.getResultList();
-		em.close();
-		return foundContacts;
-	}
-
-	public List<Contact> searchForContactsByLastName(String last) {
-		// TODO Auto-generated method stub
-		EntityManager em = emfactory.createEntityManager();
-		em.getTransaction().begin();
-		TypedQuery<Contact> typedQuery = em.createQuery("select co from Contact co where co.lastName = :selectedLastName",
-				Contact.class);
-		typedQuery.setParameter("selectedLastName", last);
-
-		List<Contact> foundContacts = typedQuery.getResultList();
-		em.close();
-		return foundContacts;
-	}
-	
-	//Date format need to be fixed
-	/*public List<Contact> searchForContactsByDob(String birthday) {
-		// TODO Auto-generated method stub
-		EntityManager em = emfactory.createEntityManager();
-		em.getTransaction().begin();
-		TypedQuery<Contact> typedQuery = em.createQuery("select co from Contact co where co.dob = :selectedDob",
-				Contact.class);
-		typedQuery.setParameter("selectedDob", birthday);
-
-		List<Contact> foundContacts = typedQuery.getResultList();
-		em.close();
-		return foundContacts;
-	}*/
-
 	public void cleanUp() {
 		emfactory.close();
 	}
