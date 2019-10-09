@@ -30,7 +30,7 @@ CREATE TABLE `addresslist` (
   `STATE` varchar(20) DEFAULT NULL,
   `ZIP` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`ADDRESSLIST_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `addresslist` (
 
 LOCK TABLES `addresslist` WRITE;
 /*!40000 ALTER TABLE `addresslist` DISABLE KEYS */;
-INSERT INTO `addresslist` VALUES (1,'Home','123 Paper Street','Anytown','NY','12345'),(2,'Home','123 Paper Street','Anytown','NY','12345'),(3,'Home','123 Paper Street','Anytown','NY','12345'),(4,'Home','123 Paper Street','Anytown','NY','12345'),(5,'Home','123 Paper Street','Anytown','NY','12345'),(6,'Work','256 Paper Street','Anytown','NY','12345'),(7,'Work','256 Paper Street','Anytown','NY','12345'),(8,'Work','256 Paper Street','Anytown','NY','12345');
+INSERT INTO `addresslist` VALUES (7,'Work','256 Paper Street','Anytown','NY','12345'),(11,'Home','123 Paper Street','Anytown','NY','12345'),(12,'School','123 University Way','State College','PA','12345'),(14,'Work','9876 Main Street','Seattle','WA','98146'),(15,'Home','635 N Home St','Boston','MA','04532'),(17,'Home','635 W Apartment St','Boston','MA','04532'),(18,'Home','635 N Home St','Boston','MA','04532');
 /*!40000 ALTER TABLE `addresslist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,7 +66,7 @@ CREATE TABLE `contact_addresses` (
 
 LOCK TABLES `contact_addresses` WRITE;
 /*!40000 ALTER TABLE `contact_addresses` DISABLE KEYS */;
-INSERT INTO `contact_addresses` VALUES (3,6),(3,8);
+INSERT INTO `contact_addresses` VALUES (3,11),(1,12),(2,14),(4,17),(5,18);
 /*!40000 ALTER TABLE `contact_addresses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +93,7 @@ CREATE TABLE `contact_phones` (
 
 LOCK TABLES `contact_phones` WRITE;
 /*!40000 ALTER TABLE `contact_phones` DISABLE KEYS */;
-INSERT INTO `contact_phones` VALUES (1,3),(2,4);
+INSERT INTO `contact_phones` VALUES (1,3),(2,4),(5,1);
 /*!40000 ALTER TABLE `contact_phones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +110,7 @@ CREATE TABLE `contacts` (
   `LASTNAME` varchar(30) NOT NULL,
   `DOB` date DEFAULT NULL,
   PRIMARY KEY (`CONTACTS_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `contacts` (
 
 LOCK TABLES `contacts` WRITE;
 /*!40000 ALTER TABLE `contacts` DISABLE KEYS */;
-INSERT INTO `contacts` VALUES (1,'Kyle','Campbell','1981-05-21'),(2,'Anna','Butler','1995-07-11'),(3,'Linda','Martinez','2001-05-03'),(4,'Peter','Stewart','1967-01-21'),(5,'Jasper','Smith','2019-10-04');
+INSERT INTO `contacts` VALUES (1,'Kyle','Campbell','1981-05-21'),(2,'Anna','Butler','1995-07-11'),(3,'Linda','Martinez','1946-05-03'),(4,'Peter','Stewart','1967-01-21'),(5,'Jasper','Smith','2019-10-05');
 /*!40000 ALTER TABLE `contacts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +135,7 @@ CREATE TABLE `phonelist` (
   `TYPE` varchar(30) DEFAULT NULL,
   `NUMBER` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`PHONELIST_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +144,7 @@ CREATE TABLE `phonelist` (
 
 LOCK TABLES `phonelist` WRITE;
 /*!40000 ALTER TABLE `phonelist` DISABLE KEYS */;
-INSERT INTO `phonelist` VALUES (1,'Home','123-456-7890'),(2,'Work','234-567-8901');
+INSERT INTO `phonelist` VALUES (1,'Home','123-456-7890'),(2,'Work','234-567-8901'),(5,'Work Cell','456-234-8911');
 /*!40000 ALTER TABLE `phonelist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -157,4 +157,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-07 16:09:10
+-- Dump completed on 2019-10-09 17:34:30
