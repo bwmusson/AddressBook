@@ -59,7 +59,7 @@
 </c:forEach>
 
 <tr>
-<td><select name="contId" id="contId">
+<td><select name="contId" id="contId" hidden="hidden">
 <c:forEach items="${requestScope.allContacts}" var="currentcontact">
    <option value = "${currentcontact.contactId}">${currentcontact.firstName} ${currentcontact.lastName}</option>
 </c:forEach>

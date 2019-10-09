@@ -41,13 +41,42 @@
   <a href="viewAllDataServlet">View All Data</a>
 </div>
 <h1>Edit Address</h1>
-<form action = "editExistingListServlet" method="post">
-Address Type: <input type ="text" name = "type" value="${addressToEdit.type}"><br />
-Street address: <input type ="text" name = "address" value="${addressToEdit.address}"><br />
-City: <input type ="text" name = "city" value="${addressToEdit.city}"> State:<input type ="text" name = "state" value="${addressToEdit.state}"> ZIP Code:<input type ="text" name = "zip" value="${addressToEdit.zip}"><br />
-<br />
-<input type = "submit" value="Edit contact and Edit address">
+<form action = "editExistingAddressServlet" method="post">
+<table>
+	<tr>
+		<td>Type: </td>
+		<td>
+			<select name="type" required="required" value="${addressToEdit.type}">
+				<option value="Home">Home</option>
+				<option value="Work">Work</option>
+				<option value="School">School</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Street: </td>
+		<td><input type ="text" name = "address" required="required" value="${addressToEdit.address}"></td>
+	</tr>
+	<tr>
+		<td>City: </td>
+		<td><input type = "text" name = "city" required="required" value="${addressToEdit.city}"></td>
+	</tr>
+	<tr>
+		<td>State: </td>
+		<td><input type = "text" name = "state" required="required" value="${addressToEdit.state}"></td>
+	</tr>
+	<tr>
+		<td>ZIP Code: </td>
+		<td><input type = "text" name = "zip" required="required" value="${addressToEdit.zip}"></td>
+	</tr>
+	<tr>
+		<td>
+			<input type="hidden" name="id" value="${addressToEdit.addressId}">
+			<input type="hidden" name="contactId" value="${contactToEdit.contactId}">
+		</td>
+		<td><input type = "submit" value="Edit Address"></td>
+	</tr>
+</table>
 </form>
-<a href = "index.html">Go to add new contact instead.</a>
 </body>
 </html>

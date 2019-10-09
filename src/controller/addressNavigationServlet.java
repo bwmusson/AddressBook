@@ -54,14 +54,11 @@ public class addressNavigationServlet extends HttpServlet {
 		else if (act.equals("Delete")) {
 			try {
 				int tempId = Integer.parseInt(request.getParameter("id"));
-				System.out.print("tempId: " + tempId);
 				int contId = Integer.parseInt(request.getParameter("contId"));
-				System.out.print("contId: " + contId);
 				Contact cont = ch.searchForContactsById(contId);
 				Address addressToDelete = ah.searchForAddressById(tempId);
 				cont.removeAddress(addressToDelete);
 				ch.updateContacts(cont);
-				System.out.println("worked");
 
 			} catch (NumberFormatException e) {
 				System.out.println("Forgot to click a button");
@@ -72,21 +69,23 @@ public class addressNavigationServlet extends HttpServlet {
 		} 
 		else if (act.equals("Edit")) {
 			try {
-				Integer tempId = Integer.parseInt(request.getParameter("id"));
-				Contact contactToEdit = ch.searchForContactsById(tempId);
-				List<Address> allAddresses = ah.showAllAddresses();
-				List<Address> currentAddress = contactToEdit.getContactAddresses();
+				
+				int tempId = Integer.parseInt(request.getParameter("id"));
+				int contId = Integer.parseInt(request.getParameter("contId"));
+				
+				Contact contactToEdit = ch.searchForContactsById(contId);
+								
+				Address addressToEdit = new Address();
+				List<Address> contactAddresses = contactToEdit.getContactAddresses();
 
-				for (int i = 0; i < allAddresses.size(); i++) {
-					for (int j = 0; j < currentAddress.size(); j++) {
-						if (allAddresses.get(i).getAddressId() == allAddresses.get(j).getAddressId()) {
-							allAddresses.remove(i);
-						}
+				for(Address a : contactAddresses) {
+					if(a.getAddressId() == tempId) {
+						addressToEdit = a;
 					}
 				}
 
 				request.setAttribute("contactToEdit", contactToEdit);
-				request.setAttribute("allAddressToAdd", allAddresses);
+				request.setAttribute("addressToEdit", addressToEdit);
 				getServletContext().getRequestDispatcher("/edit-address.jsp").forward(request, response);
 			} catch (NumberFormatException e) {
 				getServletContext().getRequestDispatcher("/viewAllAddressServlet").forward(request, response);
