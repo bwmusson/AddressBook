@@ -17,7 +17,7 @@
     </button>
     <div class="dropdown-content">
       <a href="viewAllContactsServlet">View All</a>
-      <a href="index.html">Add New</a>
+      <a href="#">Add New</a>
     </div>
    </div>
    <div class="dropdown">
@@ -34,8 +34,8 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="viewAllAddressServlet">View All</a>
-      <a href="addAddressForContactsServlet">Add New</a>
+      <a href="viewAllPhonesServlet">View All</a>
+      <a href="addAddressForPhonesServlet">Add New</a>
     </div>
   </div>
   <a href="viewAllDataServlet">View All Data</a>
@@ -45,8 +45,8 @@
 <tr>
  <th>Name</th>
  <th>Date of Birth</th>
- <th> </th>
- <th> </th>
+ <th>Type</th>
+ <th>Data</th>
 </tr>
 <c:forEach items="${requestScope.allContacts}" var="currentcontact">
  <tr>
@@ -61,7 +61,6 @@
   <td></td>
   <td>${currentAddress.type} Address:</td>
   <td>${currentAddress.address}, ${currentAddress.city}, ${currentAddress.state} ${currentAddress.zip}</td>
-  <td><a href="addressNavigationServlet?doThisToItem=delete&id=${currentAddress.addressId}&contId=${currentcontact.contactId}">Delete</a></td>
  </tr>
  </c:forEach>
   <c:forEach items="${currentcontact.contactPhones}" var="currentPhone">
@@ -70,7 +69,6 @@
   <td></td>
   <td>${currentPhone.type} Phone:</td>
   <td>${currentPhone.number}</td>
-  <td><a href="phoneNavigationServlet?doThisToItem=delete&id=${currentPhone.phoneId}&contId=${currentcontact.contactId}">Delete</a></td>
  </tr>
  </c:forEach>
 </c:forEach>

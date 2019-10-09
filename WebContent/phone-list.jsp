@@ -41,18 +41,18 @@
   </div>
   <a href="viewAllDataServlet">View All Data</a>
 </div>
-<h1>All Addresses</h1>
-<form method = "post" action = "addressNavigationServlet">
+<h1>All Phones</h1>
+<form method = "post" action = "phoneNavigationServlet">
 <table>
 <c:forEach items="${requestScope.allContacts}" var="currentcontact">
 <tr>
    <td></td>
    <td><strong>${currentcontact.firstName} ${currentcontact.lastName}</strong></td></tr>
-      <c:forEach var = "listVal" items = "${currentcontact.contactAddresses}">
+      <c:forEach var = "listVal" items = "${currentcontact.contactPhones}">
             <tr>
-            <td><input type="radio" name="id" value="${listVal.addressId}" onclick="setContId(${currentcontact.contactId});"></td>
+            <td><input type="radio" name="id" value="${listVal.phoneId}" onclick="setContId(${currentcontact.contactId});"></td>
             <td colspan="3">
-                ${listVal.type}: ${listVal.address}, ${listVal.city}, ${listVal.state}, ${listVal.zip}
+                ${listVal.type}: ${listVal.number}
                 </td>
             </tr>
   </c:forEach>

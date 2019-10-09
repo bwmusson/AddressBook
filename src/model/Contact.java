@@ -146,8 +146,17 @@ public class Contact {
 	}
 	
 	public void removePhone(Phone p) {
-		if(this.contactPhones.contains(p)) {
-			this.contactPhones.remove(p);
+		Phone contPhone = p;
+		for(Phone cp : this.contactPhones) {
+			if(cp.getPhoneId() == p.getPhoneId()) {
+				contPhone = cp;
+			}
+		}
+		if(this.contactPhones.contains(contPhone)) {
+			this.contactPhones.remove(contPhone);
+		}
+		else {
+			System.out.println("Phone Not Found");
 		}
 	}
 

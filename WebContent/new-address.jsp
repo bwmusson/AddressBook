@@ -17,7 +17,7 @@
     </button>
     <div class="dropdown-content">
       <a href="viewAllContactsServlet">View All</a>
-      <a href="index.html">Add New</a>
+      <a href="#">Add New</a>
     </div>
    </div>
    <div class="dropdown">
@@ -34,8 +34,8 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="viewAllAddressServlet">View All</a>
-      <a href="addAddressForContactsServlet">Add New</a>
+      <a href="viewAllPhonesServlet">View All</a>
+      <a href="addAddressForPhonesServlet">Add New</a>
     </div>
   </div>
   <a href="viewAllDataServlet">View All Data</a>

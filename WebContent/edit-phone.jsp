@@ -40,41 +40,31 @@
   </div>
   <a href="viewAllDataServlet">View All Data</a>
 </div>
-<h1>Edit Address</h1>
-<form action = "editExistingAddressServlet" method="post">
+<h1>Edit Phone</h1>
+<form action = "editExistingPhoneServlet" method="post">
 <table>
 	<tr>
 		<td>Type: </td>
 		<td>
-			<select name="type" required="required" value="${addressToEdit.type}">
+			<select name="type" required="required" value="${phoneToEdit.type}">
 				<option value="Home">Home</option>
+				<option value="Cell">Cell</option>
 				<option value="Work">Work</option>
+				<option value="Work Cell">Work Cell</option>
 				<option value="School">School</option>
 			</select>
 		</td>
 	</tr>
 	<tr>
-		<td>Street: </td>
-		<td><input type ="text" name = "address" required="required" value="${addressToEdit.address}"></td>
-	</tr>
-	<tr>
-		<td>City: </td>
-		<td><input type = "text" name = "city" required="required" value="${addressToEdit.city}"></td>
-	</tr>
-	<tr>
-		<td>State: </td>
-		<td><input type = "text" name = "state" required="required" value="${addressToEdit.state}"></td>
-	</tr>
-	<tr>
-		<td>ZIP Code: </td>
-		<td><input type = "text" name = "zip" required="required" value="${addressToEdit.zip}"></td>
+		<td>Number: </td>
+		<td><input type ="text" name = "number" required="required" value="${phoneToEdit.number}"></td>
 	</tr>
 	<tr>
 		<td>
-			<input type="hidden" name="id" value="${addressToEdit.addressId}">
+			<input type="hidden" name="id" value="${phoneToEdit.phoneId}">
 			<input type="hidden" name="contactId" value="${contactToEdit.contactId}">
 		</td>
-		<td><input type = "submit" value="Edit Address"></td>
+		<td><input type = "submit" value="Edit Phone"></td>
 	</tr>
 </table>
 </form>

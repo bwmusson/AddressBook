@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Edit Address</title>
+<title>Add new address</title>
 <link rel="stylesheet" href="site.css">
 </head>
 <body>
@@ -40,41 +40,38 @@
   </div>
   <a href="viewAllDataServlet">View All Data</a>
 </div>
-<h1>Edit Address</h1>
-<form action = "editExistingAddressServlet" method="post">
+<h1>Add New Phone</h1>
+<form action = "createNewPhoneServlet" method="post">
 <table>
 	<tr>
 		<td>Type: </td>
 		<td>
-			<select name="type" required="required" value="${addressToEdit.type}">
+			<select name="type" required="required">
 				<option value="Home">Home</option>
+				<option value="Cell">Cell</option>
 				<option value="Work">Work</option>
+				<option value="Work Cell">Work Cell</option>
 				<option value="School">School</option>
 			</select>
 		</td>
 	</tr>
 	<tr>
-		<td>Street: </td>
-		<td><input type ="text" name = "address" required="required" value="${addressToEdit.address}"></td>
+		<td>Number: </td>
+		<td><input type ="text" name = "number" required="required"></td>
 	</tr>
 	<tr>
-		<td>City: </td>
-		<td><input type = "text" name = "city" required="required" value="${addressToEdit.city}"></td>
-	</tr>
-	<tr>
-		<td>State: </td>
-		<td><input type = "text" name = "state" required="required" value="${addressToEdit.state}"></td>
-	</tr>
-	<tr>
-		<td>ZIP Code: </td>
-		<td><input type = "text" name = "zip" required="required" value="${addressToEdit.zip}"></td>
-	</tr>
-	<tr>
+		<td>Available Contacts: </td>
 		<td>
-			<input type="hidden" name="id" value="${addressToEdit.addressId}">
-			<input type="hidden" name="contactId" value="${contactToEdit.contactId}">
+			<select name="allContactsToAdd" multiple size="6" required="required">
+				<c:forEach items="${requestScope.allContacts}" var="currentcontact">
+   					<option value = "${currentcontact.contactId}">${currentcontact.firstName} ${currentcontact.lastName}</option>
+				</c:forEach>
+			</select>
 		</td>
-		<td><input type = "submit" value="Edit Address"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type = "submit" value="Add Phone"></td>
 	</tr>
 </table>
 </form>

@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,64 +19,86 @@ import model.Phone;
 @WebServlet("/phoneNavigationServlet")
 public class phoneNavigationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public phoneNavigationServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public phoneNavigationServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		PhoneHelper ph = new PhoneHelper();
 		ContactHelper ch = new ContactHelper();
 		String act = request.getParameter("doThisToItem");
 
 		if (act == null) {
 			// no button has been selected
-			getServletContext().getRequestDispatcher("/viewAllContactsServlet").forward(request, response);
+			getServletContext().getRequestDispatcher("/viewAllPhonesServlet").forward(request, response);
 
-		} else if (act.equals("delete")) {
+		} 
+		else if (act.equals("Delete")) {
 			try {
 				int tempId = Integer.parseInt(request.getParameter("id"));
 				int contId = Integer.parseInt(request.getParameter("contId"));
 				Contact cont = ch.searchForContactsById(contId);
-				Phone phoneToDelete = ph.searchForPhoneById(tempId);
+				Phone phoneToDelete = ph.searchForPhoneById(tempId);		
 				cont.removePhone(phoneToDelete);
-				ph.deletePhone(phoneToDelete);
-				System.out.println("worked");
+				ch.updateContacts(cont);
 
 			} catch (NumberFormatException e) {
 				System.out.println("Forgot to click a button");
 			} finally {
-				getServletContext().getRequestDispatcher("/viewAllDataServlet").forward(request, response);
+				getServletContext().getRequestDispatcher("/viewAllPhonesServlet").forward(request, response);
 			}
 
-		} /*else if (act.equals("edit")) {
+		} 
+		else if (act.equals("Edit")) {
 			try {
-				Integer tempId = Integer.parseInt(request.getParameter("id"));
-				Contact contactToEdit = ah.searchForContactsById(tempId);
-				request.setAttribute("contactToEdit", contactToEdit);
-				getServletContext().getRequestDispatcher("/edit-contact.jsp").forward(request, response);
-			} catch (NumberFormatException e) {
-				getServletContext().getRequestDispatcher("/viewAllContactsServlet").forward(request, response);
-			} 
+				
+				int tempId = Integer.parseInt(request.getParameter("id"));
+				int contId = Integer.parseInt(request.getParameter("contId"));
+				
+				Contact contactToEdit = ch.searchForContactsById(contId);
+								
+				Phone phoneToEdit = new Phone();
+				List<Phone> contactPhones = contactToEdit.getContactPhones();
 
-		} else if (act.equals("add")) {
-			getServletContext().getRequestDispatcher("/index.html").forward(request, response);
-		}*/
+				for(Phone p : contactPhones) {
+					if(p.getPhoneId() == tempId) {
+						phoneToEdit = p;
+					}
+				}
+
+				request.setAttribute("contactToEdit", contactToEdit);
+				request.setAttribute("phoneToEdit", phoneToEdit);
+				getServletContext().getRequestDispatcher("/edit-phone.jsp").forward(request, response);
+			} catch (NumberFormatException e) {
+				getServletContext().getRequestDispatcher("/viewAllPhonesServlet").forward(request, response);
+			}
+
+		} 
+		else if (act.equals("Add New")) {
+			getServletContext().getRequestDispatcher("/addPhoneForContactsServlet").forward(request, response);
+		}
+		else {
+			System.out.println("Bad Parameter Passed");
+		}
 	}
 
 }
