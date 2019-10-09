@@ -6,23 +6,84 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Add new address</title>
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
+<div class="navbar">
+  <a href="index.html">Home</a>
+  <div class="dropdown">
+    <button class="dropbtn">Contacts
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="viewAllContactsServlet">View All</a>
+      <a href="index.html">Add New</a>
+    </div>
+   </div>
+   <div class="dropdown">
+    <button class="dropbtn">Addresses
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="viewAllAddressServlet">View All</a>
+      <a href="addAddressForContactsServlet">Add New</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">Phones
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="viewAllAddressServlet">View All</a>
+      <a href="addAddressForContactsServlet">Add New</a>
+    </div>
+  </div>
+  <a href="viewAllDataServlet">View All Data</a>
+</div>
+<h1>Add New Address</h1>
 <form action = "createNewAddressServlet" method="post">
-Address Type: <input type ="text" name = "type"><br />
-Street address: <input type ="text" name = "address"><br />
-City: <input type = "text" name = "city"> State:<input type = "text" name = "state"> ZIP Code:<input type = "text" name = "zip"><br />
-
-Available Contacts:<br />
-
-<select name="allContactsToAdd" multiple size="6" required="required">
-<c:forEach items="${requestScope.allContacts}" var="currentcontact">
-   <option value = "${currentcontact.contactId}">${currentcontact.firstName} ${currentcontact.lastName}</option>
-</c:forEach>
-</select>
-<br />
-<input type = "submit" value="Add Address">
+<table>
+	<tr>
+		<td>Type: </td>
+		<td>
+			<select name="type" required="required">
+				<option value="Home">Home</option>
+				<option value="Work">Work</option>
+				<option value="School">School</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Street: </td>
+		<td><input type ="text" name = "address" required="required"></td>
+	</tr>
+	<tr>
+		<td>City: </td>
+		<td><input type = "text" name = "city" required="required"></td>
+	</tr>
+	<tr>
+		<td>State: </td>
+		<td><input type = "text" name = "state" required="required"></td>
+	</tr>
+	<tr>
+		<td>ZIP Code: </td>
+		<td><input type = "text" name = "zip" required="required"></td>
+	</tr>
+	<tr>
+		<td>Available Contacts: </td>
+		<td>
+			<select name="allContactsToAdd" multiple size="6" required="required">
+				<c:forEach items="${requestScope.allContacts}" var="currentcontact">
+   					<option value = "${currentcontact.contactId}">${currentcontact.firstName} ${currentcontact.lastName}</option>
+				</c:forEach>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type = "submit" value="Add Address"></td>
+	</tr>
+</table>
 </form>
-<a href = "index.html">Go to add new contacts instead</a>
 </body>
 </html>

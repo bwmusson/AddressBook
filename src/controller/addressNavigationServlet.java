@@ -33,31 +33,44 @@ public class addressNavigationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		AddressHelper ah = new AddressHelper();
 		ContactHelper ch = new ContactHelper();
 		String act = request.getParameter("doThisToItem");
 
 		if (act == null) {
 			// no button has been selected
-			getServletContext().getRequestDispatcher("/viewAllContactsServlet").forward(request, response);
+			getServletContext().getRequestDispatcher("/viewAllAddressServlet").forward(request, response);
 
-		} else if (act.equals("delete")) {
+		} 
+		else if (act.equals("Delete")) {
 			try {
 				int tempId = Integer.parseInt(request.getParameter("id"));
+				System.out.print("tempId: " + tempId);
 				int contId = Integer.parseInt(request.getParameter("contId"));
+				System.out.print("contId: " + contId);
 				Contact cont = ch.searchForContactsById(contId);
 				Address addressToDelete = ah.searchForAddressById(tempId);
 				cont.removeAddress(addressToDelete);
-				ah.deleteAddress(addressToDelete);
+				ch.updateContacts(cont);
 				System.out.println("worked");
 
 			} catch (NumberFormatException e) {
 				System.out.println("Forgot to click a button");
 			} finally {
-				getServletContext().getRequestDispatcher("/viewAllDataServlet").forward(request, response);
+				getServletContext().getRequestDispatcher("/viewAllAddressServlet").forward(request, response);
 			}
 
-		} else if (act.equals("edit")) {
+		} 
+		else if (act.equals("Edit")) {
 			try {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));
 				Contact contactToEdit = ch.searchForContactsById(tempId);
@@ -79,18 +92,13 @@ public class addressNavigationServlet extends HttpServlet {
 				getServletContext().getRequestDispatcher("/viewAllAddressServlet").forward(request, response);
 			}
 
-		} else if (act.equals("add")) {
+		} 
+		else if (act.equals("Add New")) {
 			getServletContext().getRequestDispatcher("/addAddressForContactsServlet").forward(request, response);
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+		else {
+			System.out.println("Bad Parameter Passed");
+		}
 	}
 
 }

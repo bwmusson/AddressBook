@@ -12,7 +12,7 @@ import model.Contact;
 /**
  * Servlet implementation class navigationServlet
  */
-@WebServlet("/navigationServlet")
+@WebServlet("/contactNavigationServlet")
 public class contactNavigationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -44,7 +44,7 @@ public class contactNavigationServlet extends HttpServlet {
 			// no button has been selected
 			getServletContext().getRequestDispatcher("/viewAllContactsServlet").forward(request, response);
 
-		} else if (act.equals("delete")) {
+		} else if (act.equals("Delete")) {
 			try {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));
 				Contact contactToDelete = dao.searchForContactsById(tempId);
@@ -56,7 +56,7 @@ public class contactNavigationServlet extends HttpServlet {
 				getServletContext().getRequestDispatcher("/viewAllContactsServlet").forward(request, response);
 			}
 
-		} else if (act.equals("edit")) {
+		} else if (act.equals("Edit")) {
 			try {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));
 				Contact contactToEdit = dao.searchForContactsById(tempId);
@@ -66,7 +66,7 @@ public class contactNavigationServlet extends HttpServlet {
 				getServletContext().getRequestDispatcher("/viewAllContactsServlet").forward(request, response);
 			} 
 
-		} else if (act.equals("add")) {
+		} else if (act.equals("Add New")) {
 			getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 		}
 	}

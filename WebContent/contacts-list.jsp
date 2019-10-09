@@ -6,10 +6,49 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Contacts List</title>
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
-<form method = "post" action = "navigationServlet">
+<div class="navbar">
+  <a href="index.html">Home</a>
+  <div class="dropdown">
+    <button class="dropbtn">Contacts
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="viewAllContactsServlet">View All</a>
+      <a href="index.html">Add New</a>
+    </div>
+   </div>
+   <div class="dropdown">
+    <button class="dropbtn">Addresses
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="viewAllAddressServlet">View All</a>
+      <a href="addAddressForContactsServlet">Add New</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">Phones
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="viewAllAddressServlet">View All</a>
+      <a href="addAddressForContactsServlet">Add New</a>
+    </div>
+  </div>
+  <a href="viewAllDataServlet">View All Data</a>
+</div>
+<h1>All Contacts</h1>
+<form method = "post" action = "contactNavigationServlet">
 <table>
+<tr>
+<th></th>
+<th>First Name</th>
+<th>Last Name</th>
+<th>Date of Birth</th>
+</tr>
 <c:forEach items="${requestScope.allContacts}" var="currentcontact">
 <tr>
    <td><input type="radio" name="id" value="${currentcontact.contactId}"></td>
@@ -18,10 +57,13 @@
    <td>${currentcontact.dob}</td>
    </tr>
 </c:forEach>
+<tr>
+<td></td>
+<td><input type = "submit" value = "Edit" name="doThisToItem"></td>
+<td><input type = "submit" value = "Delete" name="doThisToItem"></td>
+<td><input type="submit" value = "Add New" name = "doThisToItem"></td>
+</tr>
 </table>
-<input type = "submit" value = "edit" name="doThisToItem">
-<input type = "submit" value = "delete" name="doThisToItem">
-<input type="submit" value = "add" name = "doThisToItem">
 </form>
 </body>
 </html>
