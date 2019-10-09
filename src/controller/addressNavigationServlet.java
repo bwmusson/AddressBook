@@ -64,7 +64,6 @@ public class addressNavigationServlet extends HttpServlet {
 				List<Address> allAddresses = ah.showAllAddresses();
 				List<Address> currentAddress = contactToEdit.getContactAddresses();
 
-				System.out.println("----After removing items-------");
 				for (int i = 0; i < allAddresses.size(); i++) {
 					for (int j = 0; j < currentAddress.size(); j++) {
 						if (allAddresses.get(i).getAddressId() == allAddresses.get(j).getAddressId()) {
